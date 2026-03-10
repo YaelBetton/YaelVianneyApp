@@ -3,29 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YaelApp.Pages.HomePage"
              Title="Accueil">
-    <VerticalStackLayout
-        Spacing="25"
-        Padding="30,0"
-        VerticalOptions="Center">
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="24">
+            <Label
+                Text="Bienvenue sur l'application de Vianney et Yael !"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="28 "
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
 
-        <Image
-            Source="dotnet_bot.png"
-            SemanticProperties.Description="Bot .NET"
-            HeightRequest="200"
-            HorizontalOptions="Center" />
+            <Label
+                Text="Voici l'actualité sportive du jour :"
+                FontSize="16"
+                TextColor="Gray"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
 
-        <Label
-            Text="Bienvenue sur la page d'accueil"
-            SemanticProperties.HeadingLevel="Level1"
-            FontSize="32"
-            HorizontalOptions="Center" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,12,0,0">
+                <Image
+                    Grid.Column="0"
+                    Source="nadal_article.jpg"
+                    HeightRequest="300"
+                    Aspect="AspectFill"
+                    SemanticProperties.Description="Nadal Retraite" />
 
-        <Label
-            Text="Ceci est l'onglet Accueil"
-            SemanticProperties.Description="Message de bienvenue"
-            FontSize="18"
-            HorizontalOptions="Center" />
+                <Image
+                    Grid.Column="1"
+                    Source="wemby_article.jpg"
+                    HeightRequest="300"
+                    Aspect="AspectFill"
+                    SemanticProperties.Description="Wenby Draft" />
+            </Grid>
 
-    </VerticalStackLayout>
+            <Button
+                Text="Gif du jour"
+                HorizontalOptions="Center"
+                Margin="0,16,0,0"
+                Padding="24,10" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
-
