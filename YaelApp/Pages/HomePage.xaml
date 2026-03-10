@@ -40,6 +40,44 @@
                 HorizontalOptions="Center"
                 Margin="0,16,0,0"
                 Padding="24,10" />
+            
+            <CarouselView x:Name="NewsCarousel"
+                          HeightRequest="300"
+                          Loop="True"
+                          Margin="0,12,0,0">
+                <CarouselView.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>carousel1.jpeg</x:String>
+                        <x:String>carousel2.jpg</x:String>
+                        <x:String>carousel3.jpg</x:String>
+                        <x:String>carousel4.jpg</x:String>
+                        <x:String>carousel5.jpg</x:String>
+                        <x:String>carousel6.jpg</x:String>
+                        <x:String>carousel7.jpg</x:String>
+                        <x:String>carousel8.jpg</x:String>
+                    </x:Array>
+                </CarouselView.ItemsSource>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding .}"
+                               Aspect="AspectFill"
+                               HeightRequest="300" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <HorizontalStackLayout Spacing="16"
+                                   HorizontalOptions="Center"
+                                   Margin="0,8,0,0">
+                <Button Text="&lt;"
+                        WidthRequest="56"
+                        FontSize="22"
+                        Clicked="OnPreviousClicked" />
+                <Button Text="&gt;"
+                        WidthRequest="56"
+                        FontSize="22"
+                        Clicked="OnNextClicked" />
+            </HorizontalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
