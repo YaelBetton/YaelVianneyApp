@@ -3,12 +3,33 @@
     x:Class="YaelApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:YaelApp"
+    xmlns:pages="clr-namespace:YaelApp.Pages"
     Title="YaelApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent
+            Title="Accueil"
+            Icon="home.png"
+            ContentTemplate="{DataTemplate pages:HomePage}"
+            Route="HomePage" />
+
+        <ShellContent
+            Title="Tennis"
+            Icon="tennis.png"
+            ContentTemplate="{DataTemplate pages:TennisPage}"
+            Route="TennisPage" />
+
+        <ShellContent
+            Title="Volley"
+            Icon="volley.png"
+            ContentTemplate="{DataTemplate pages:VolleyPage}"
+            Route="VolleyPage" />
+
+        <ShellContent
+            Title="Basket"
+            Icon="basket.png"
+            ContentTemplate="{DataTemplate pages:BasketPage}"
+            Route="BasketPage" />
+    </TabBar>
 
 </Shell>
