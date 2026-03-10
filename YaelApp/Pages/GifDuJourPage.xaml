@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="YaelApp.Pages.GifDuJourPage"
+             Title="Gif du jour"
+             Shell.NavBarIsVisible="False">
+    <Grid Padding="24" RowDefinitions="Auto,*,Auto,Auto" RowSpacing="16">
+        <Label
+            Text="Gif du jour"
+            FontSize="28"
+            FontAttributes="Bold"
+            HorizontalOptions="Center" />
+
+        <WebView
+            Grid.Row="1"
+            HeightRequest="420"
+            VerticalOptions="Center"
+            HorizontalOptions="Fill">
+            <WebView.Source>
+                <HtmlWebViewSource>
+                    <HtmlWebViewSource.Html>
+                        <![CDATA[
+                        <!doctype html>
+                        <html>
+                        <head>
+                          <meta charset="utf-8" />
+                          <meta name="viewport" content="width=device-width, initial-scale=1" />
+                          <style>
+                            body { margin: 0; background: #000; }
+                            .tenor-gif-embed { margin: 0 auto; }
+                          </style>
+                        </head>
+                        <body>
+                          <div class="tenor-gif-embed"
+                               data-postid="4849280188401180197"
+                               data-share-method="host"
+                               data-aspect-ratio="0.564257"
+                               data-width="100%">
+                            <a href="https://tenor.com/view/eurosport-djoko-novak-djokovic-dance-happy-gif-4849280188401180197">Eurosport Djoko GIF</a>
+                            from <a href="https://tenor.com/search/eurosport-gifs">Eurosport GIFs</a>
+                          </div>
+                          <script async src="https://tenor.com/embed.js"></script>
+                        </body>
+                        </html>
+                        ]]>
+                    </HtmlWebViewSource.Html>
+                </HtmlWebViewSource>
+            </WebView.Source>
+        </WebView>
+
+        <Label
+            Grid.Row="2"
+            x:Name="InfoLabel"
+            Text="Lecture en cours..."
+            TextColor="Gray"
+            HorizontalOptions="Center"
+            HorizontalTextAlignment="Center" />
+
+        <Button
+            Grid.Row="3"
+            x:Name="RetourAccueilButton"
+            Text="Revenir a l'accueil"
+            Clicked="OnRetourAccueilClicked"
+            IsVisible="False"
+            IsEnabled="False"
+            HorizontalOptions="Center"
+            Padding="24,10" />
+    </Grid>
+</ContentPage>
+

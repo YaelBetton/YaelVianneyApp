@@ -36,6 +36,7 @@
             </Grid>
 
             <Button
+                x:Name="GifDuJourButton"
                 Text="Gif du jour"
                 HorizontalOptions="Center"
                 Margin="0,16,0,0"
