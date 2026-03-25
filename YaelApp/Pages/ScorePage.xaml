@@ -1,12 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:YaelApp.ViewModels"
              xmlns:models="clr-namespace:YaelApp.Models"
              x:Class="YaelApp.Pages.ScorePage"
-             x:DataType="viewmodels:ScoreViewModel"
-             Title="Scores">
+             Title="Score">
     <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,20"
+            VerticalOptions="Center">
+
+            <Image
+                Source="scores_image.jpg"
+                SemanticProperties.Description="Image de scores sportifs"
+                HeightRequest="200"
+                WidthRequest="200"
+                Aspect="AspectFit"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Score"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Retrouve ici les scores et resultats des matchs."
+                FontSize="18"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
         <VerticalStackLayout Spacing="24" Padding="16">
             <Label Text="Résultats Tennis" FontSize="24" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding TennisMatches}"
@@ -15,7 +39,6 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:MatchModel">
                         <Frame Margin="0,6" Padding="12" CornerRadius="12" HasShadow="True">
-                            <Frame.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                     CommandParameter="{Binding .}" />
