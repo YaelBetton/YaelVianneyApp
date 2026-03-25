@@ -19,8 +19,8 @@ public static class MauiProgram
 
         // Registration of Services and Pages
         builder.Services.AddSingleton<SportsService>();
+        builder.Services.AddTransient<ScorePage>();
         builder.Services.AddTransient<TennisPage>();
-        builder.Services.AddTransient<BasketPage>();
         builder.Services.AddTransient<VolleyPage>();
 
 #if DEBUG

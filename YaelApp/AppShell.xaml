@@ -14,6 +14,11 @@
             Route="HomePage" />
 
         <ShellContent
+            Title="Score"
+            ContentTemplate="{DataTemplate pages:ScorePage}"
+            Route="ScorePage" />
+
+        <ShellContent
             Title="Tennis"
             Icon="tennis.png"
             ContentTemplate="{DataTemplate pages:TennisPage}"
@@ -24,12 +29,6 @@
             Icon="volley.png"
             ContentTemplate="{DataTemplate pages:VolleyPage}"
             Route="VolleyPage" />
-
-        <ShellContent
-            Title="Basket"
-            Icon="basket.png"
-            ContentTemplate="{DataTemplate pages:BasketPage}"
-            Route="BasketPage" />
     </TabBar>
 
 </Shell>
