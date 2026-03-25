@@ -15,6 +15,7 @@
 
         <ShellContent
             Title="Score"
+            Icon="score.svg"
             ContentTemplate="{DataTemplate pages:ScorePage}"
             Route="ScorePage" />
 
