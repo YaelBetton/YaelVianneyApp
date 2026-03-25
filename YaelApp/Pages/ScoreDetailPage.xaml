@@ -21,8 +21,8 @@
                     <Label Text="Score final :" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
                     <Grid ColumnDefinitions="*, Auto, *" ColumnSpacing="15">
                         <Label Grid.Column="0" Text="{Binding Match.EquipeDomicile}" FontSize="16" HorizontalOptions="End" />
-                        <Label Grid.Column="1" Text="{Binding Match.ScoreHome, StringFormat='{0} - '}" FontSize="20" FontAttributes="Bold" />
-                        <Label Grid.Column="2" Text="{Binding Match.ScoreAway}" FontSize="20" FontAttributes="Bold" HorizontalOptions="Start"/>
+                        <Label Grid.Column="1" Text="{Binding Match.ScoreDisplay}" FontSize="20" FontAttributes="Bold" />
+                        <Label Grid.Column="2" Text="{Binding Match.EquipeExterieur}" FontSize="16" HorizontalOptions="Start" />
                     </Grid>
                 </VerticalStackLayout>
             </Frame>

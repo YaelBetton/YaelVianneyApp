@@ -35,6 +35,44 @@ namespace YaelApp.Models
         [JsonIgnore]
         public string ScoreAway => string.IsNullOrEmpty(ScoreAwayRaw) ? "" : ScoreAwayRaw;
 
+        [JsonIgnore]
+        public string ScoreDisplay
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(ScoreHomeRaw) && !string.IsNullOrWhiteSpace(ScoreAwayRaw))
+                {
+                    return $"{ScoreHomeRaw} - {ScoreAwayRaw}";
+                }
+
+                if (!string.IsNullOrWhiteSpace(ResultatRaw))
+                {
+                    var setParts = ResultatRaw.Split('-', System.StringSplitOptions.RemoveEmptyEntries);
+                    var cleanedSets = new List<string>();
+                    foreach (var part in setParts)
+                    {
+                        var trimmed = part.Trim();
+                        if (!string.IsNullOrWhiteSpace(trimmed))
+                        {
+                            cleanedSets.Add(trimmed);
+                        }
+                    }
+
+                    if (cleanedSets.Count > 0)
+                    {
+                        return string.Join(" - ", cleanedSets);
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(ScoreHomeRaw))
+                {
+                    return ScoreHomeRaw;
+                }
+
+                return "Score indisponible";
+            }
+        }
+
         [JsonProperty("strThumb")]
         public string RawImageUrl { get; set; }
 
