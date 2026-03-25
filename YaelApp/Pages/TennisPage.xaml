@@ -8,7 +8,6 @@
             Spacing="25"
             Padding="30,20"
             VerticalOptions="Center">
-
             <Image
                 Source="tennis_image.jpg"
                 SemanticProperties.Description="Image de tennis"
@@ -16,32 +15,15 @@
                 WidthRequest="200"
                 Aspect="AspectFit"
                 HorizontalOptions="Center" />
-
             <Label
                 Text="Tennis"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
-
             <Label
                 Text="Informations sur le tennis"
                 FontSize="18"
                 HorizontalOptions="Center" />
-
-            <CollectionView x:Name="MaListeDeMatchs" HeightRequest="400">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Padding="10">
-                            <Image Source="{Binding ImageUrl}" HeightRequest="100" Aspect="AspectFit"/>
-                            <Label Text="{Binding NomMatch}" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
-                            <Label Text="{Binding ScoreHome, StringFormat='Home: {0}'}" HorizontalOptions="Center"/>
-                            <Label Text="{Binding ScoreAway, StringFormat='Away: {0}'}" HorizontalOptions="Center"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
-

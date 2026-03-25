@@ -26,6 +26,9 @@ namespace YaelApp.Models
         [JsonProperty("strAwayTeam")]
         public string EquipeExterieur { get; set; }
 
+        [JsonProperty("strSport")]
+        public string Sport { get; set; }
+
         [JsonIgnore]
         public string ScoreHome => string.IsNullOrEmpty(ScoreHomeRaw) ? (string.IsNullOrEmpty(ResultatRaw) ? "Score indisponible" : ResultatRaw) : ScoreHomeRaw;
 
@@ -36,7 +39,20 @@ namespace YaelApp.Models
         public string RawImageUrl { get; set; }
 
         [JsonIgnore]
-        public string ImageUrl => string.IsNullOrEmpty(RawImageUrl) ? "dotnet_bot.png" : RawImageUrl;
+        public string ImageUrl
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(RawImageUrl))
+                {
+                    return RawImageUrl;
+                }
+
+                return string.Equals(Sport, "Tennis", System.StringComparison.OrdinalIgnoreCase)
+                    ? "tennis_fallback.jpg"
+                    : "dotnet_bot.png";
+            }
+        }
     }
 
     // L'API renvoie toujours une liste dans un objet parent (ici "events")
