@@ -7,7 +7,7 @@
              x:DataType="viewmodels:ScoreViewModel"
              Title="Score">
     <ScrollView>
-        <VerticalStackLayout Spacing="30" Padding="30,20">
+        <VerticalStackLayout Spacing="24" Padding="16">
             <!-- Bandeau descriptif -->
             <VerticalStackLayout Spacing="15" HorizontalOptions="Center" WidthRequest="300">
                 <Image Source="scores_image.jpg"
@@ -26,27 +26,6 @@
                        HorizontalTextAlignment="Center" />
             </VerticalStackLayout>
 
-            <Image
-                Source="scores_image.jpg"
-                SemanticProperties.Description="Image de scores sportifs"
-                HeightRequest="220"
-                WidthRequest="220"
-                Aspect="AspectFit"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Score"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Retrouve ici les scores et resultats des matchs."
-                FontSize="18"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center" />
-        </VerticalStackLayout>
-        <VerticalStackLayout Spacing="24" Padding="16">
             <Label Text="Résultats Tennis" FontSize="24" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding TennisMatches}"
                             SelectionMode="None">
