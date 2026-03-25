@@ -4,44 +4,38 @@
              xmlns:viewmodels="clr-namespace:YaelApp.ViewModels"
              xmlns:models="clr-namespace:YaelApp.Models"
              x:Class="YaelApp.Pages.ScorePage"
+             x:DataType="viewmodels:ScoreViewModel"
              Title="Score">
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,20"
-            VerticalOptions="Center">
+        <VerticalStackLayout Spacing="30" Padding="30,20">
+            <!-- Bandeau descriptif -->
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center" WidthRequest="300">
+                <Image Source="scores_image.jpg"
+                       SemanticProperties.Description="Image de scores sportifs"
+                       HeightRequest="200"
+                       WidthRequest="200"
+                       Aspect="AspectFit"
+                       HorizontalOptions="Center" />
+                <Label Text="Score"
+                       SemanticProperties.HeadingLevel="Level1"
+                       FontSize="32"
+                       HorizontalOptions="Center" />
+                <Label Text="Retrouve ici les scores et résultats des matchs."
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+            </VerticalStackLayout>
 
-            <Image
-                Source="scores_image.jpg"
-                SemanticProperties.Description="Image de scores sportifs"
-                HeightRequest="200"
-                WidthRequest="200"
-                Aspect="AspectFit"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Score"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Retrouve ici les scores et resultats des matchs."
-                FontSize="18"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center" />
-        </VerticalStackLayout>
-        <VerticalStackLayout Spacing="24" Padding="16">
+            <!-- Section tennis -->
             <Label Text="Résultats Tennis" FontSize="24" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding TennisMatches}"
-                            SelectionMode="None"
-                            Margin="0,0,0,20">
+                            SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:MatchModel">
                         <Frame Margin="0,6" Padding="12" CornerRadius="12" HasShadow="True">
-                                <TapGestureRecognizer
-                                    Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                    CommandParameter="{Binding .}" />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                      CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
                                 <Image Grid.Column="0"
@@ -61,6 +55,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <!-- Section volley -->
             <Label Text="Résultats Volley" FontSize="24" FontAttributes="Bold" />
             <CollectionView ItemsSource="{Binding VolleyMatches}"
                             SelectionMode="None">
@@ -68,9 +63,8 @@
                     <DataTemplate x:DataType="models:MatchModel">
                         <Frame Margin="0,6" Padding="12" CornerRadius="12" HasShadow="True">
                             <Frame.GestureRecognizers>
-                                <TapGestureRecognizer
-                                    Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                    CommandParameter="{Binding .}" />
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                      CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
                                 <Image Grid.Column="0"
