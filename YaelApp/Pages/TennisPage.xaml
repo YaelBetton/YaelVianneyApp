@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YaelApp.Pages.TennisPage"
@@ -20,10 +20,15 @@
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
-            <Label
-                Text="Informations sur le tennis"
-                FontSize="18"
-                HorizontalOptions="Center" />
+
+            <Entry x:Name="Player1Entry" Placeholder="Nom du Joueur 1" />
+            <Entry x:Name="Player2Entry" Placeholder="Nom du Joueur 2" />
+            <DatePicker x:Name="MatchDatePicker" Format="dd/MM/yyyy" />
+            <Label Text="Sets" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
+            <StackLayout x:Name="SetsStack" Spacing="10" />
+            <Button x:Name="AddSetButton" Text="Ajouter un set" Clicked="OnAddSetClicked" />
+            <Button Text="Enregistrer le match" Clicked="OnSaveMatchClicked" />
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
