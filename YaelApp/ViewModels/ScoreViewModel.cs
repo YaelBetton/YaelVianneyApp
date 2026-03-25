@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.ApplicationModel;
 using YaelApp.Models;
 using YaelApp.Services;
+using YaelApp.ViewModels;
 
 namespace YaelApp.ViewModels
 {
@@ -24,6 +25,9 @@ namespace YaelApp.ViewModels
         private ObservableCollection<MatchModel> volleyMatches;
 
         [ObservableProperty]
+        private ObservableCollection<TennisMatchViewModel> tennisMatchesVM;
+
+        [ObservableProperty]
         private bool isBusy;
 
         public ScoreViewModel(SportsService sportsService)
@@ -32,6 +36,13 @@ namespace YaelApp.ViewModels
             Matches = new ObservableCollection<MatchModel>();
             TennisMatches = TennisMatchService.Instance.TennisMatches;
             VolleyMatches = new ObservableCollection<MatchModel>();
+            TennisMatchesVM = new ObservableCollection<TennisMatchViewModel>(TennisMatches.Select(m => new TennisMatchViewModel(m)));
+            TennisMatches.CollectionChanged += (s, e) =>
+            {
+                TennisMatchesVM.Clear();
+                foreach (var m in TennisMatches)
+                    TennisMatchesVM.Add(new TennisMatchViewModel(m));
+            };
         }
 
         [RelayCommand]
