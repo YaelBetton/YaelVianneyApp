@@ -1,4 +1,6 @@
 using System.Collections.ObjectModel;
+using YaelApp.Models;
+using YaelApp.Services;
 
 namespace YaelApp.Pages;
 public partial class TennisPage : ContentPage
@@ -67,6 +69,18 @@ public partial class TennisPage : ContentPage
             sets.Add($"{s1}/{s2}");
         }
         string scoreMatch = string.Join(" - ", sets);
+        // Ajout du match dans le service partagé
+        var match = new MatchModel
+        {
+            Id = Guid.NewGuid().ToString(),
+            NomMatch = $"{joueur1} vs {joueur2}",
+            EquipeDomicile = joueur1,
+            EquipeExterieur = joueur2,
+            ResultatRaw = scoreMatch,
+            Sport = "Tennis",
+            RawImageUrl = "tennis_image.jpg"
+        };
+        TennisMatchService.Instance.AddMatch(match);
         await DisplayAlertAsync("Succès", $"Match enregistré : {joueur1} vs {joueur2} le {dateMatch:dd/MM/yyyy} - Score : {scoreMatch}", "OK");
         Player1Entry.Text = string.Empty;
         Player2Entry.Text = string.Empty;

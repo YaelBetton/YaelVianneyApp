@@ -30,7 +30,7 @@ namespace YaelApp.ViewModels
         {
             _sportsService = sportsService;
             Matches = new ObservableCollection<MatchModel>();
-            TennisMatches = new ObservableCollection<MatchModel>();
+            TennisMatches = TennisMatchService.Instance.TennisMatches;
             VolleyMatches = new ObservableCollection<MatchModel>();
         }
 
@@ -52,7 +52,6 @@ namespace YaelApp.ViewModels
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     Matches.Clear();
-                    TennisMatches.Clear();
                     VolleyMatches.Clear();
 
                     if (basketResult is not null)
@@ -65,9 +64,12 @@ namespace YaelApp.ViewModels
 
                     if (tennisResult is not null)
                     {
+                        // On ajoute les nouveaux résultats API sans effacer les locaux
                         foreach (var match in tennisResult)
                         {
-                            TennisMatches.Add(match);
+                            // On évite les doublons (par exemple, même id)
+                            if (!TennisMatches.Any(m => m.Id == match.Id))
+                                TennisMatches.Add(match);
                         }
                     }
 

@@ -53,6 +53,31 @@ namespace YaelApp.Models
                     : "dotnet_bot.png";
             }
         }
+
+        [JsonIgnore]
+        public List<string> TennisSetsFormatted
+        {
+            get
+            {
+                var sets = new List<string>();
+                // Pour les matchs locaux, ResultatRaw est du type "6/3 - 6/2 - 7/5" etc.
+                if (!string.IsNullOrWhiteSpace(ResultatRaw) && !string.IsNullOrWhiteSpace(EquipeDomicile) && !string.IsNullOrWhiteSpace(EquipeExterieur))
+                {
+                    var setParts = ResultatRaw.Split('-');
+                    int setNum = 1;
+                    foreach (var set in setParts)
+                    {
+                        var scores = set.Trim().Split('/');
+                        if (scores.Length == 2)
+                        {
+                            sets.Add($"Set {setNum} : {EquipeDomicile} {scores[0]} - {scores[1]} {EquipeExterieur}");
+                        }
+                        setNum++;
+                    }
+                }
+                return sets;
+            }
+        }
     }
 
     // L'API renvoie toujours une liste dans un objet parent (ici "events")
