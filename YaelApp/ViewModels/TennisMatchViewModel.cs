@@ -5,6 +5,7 @@ namespace YaelApp.ViewModels
 {
     public class TennisMatchViewModel
     {
+        public MatchModel Match { get; }
         public string NomMatch { get; }
         public string ImageUrl { get; }
         public string Id { get; }
@@ -12,6 +13,7 @@ namespace YaelApp.ViewModels
 
         public TennisMatchViewModel(MatchModel model)
         {
+            Match = model;
             NomMatch = model.NomMatch;
             ImageUrl = model.ImageUrl;
             Id = model.Id;
@@ -33,4 +35,3 @@ namespace YaelApp.ViewModels
         }
     }
 }
-

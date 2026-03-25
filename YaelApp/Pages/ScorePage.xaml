@@ -32,6 +32,10 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="viewmodels:TennisMatchViewModel">
                         <Frame Margin="0,6" Padding="12" CornerRadius="12" HasShadow="True">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                      CommandParameter="{Binding Match}" />
+                            </Frame.GestureRecognizers>
                             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
                                 <Image Grid.Column="0"
                                        Source="{Binding ImageUrl}"
