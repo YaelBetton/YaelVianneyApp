@@ -4,6 +4,7 @@ namespace YaelApp.Pages;
 public partial class TennisPage : ContentPage
 {
     private const int MaxSets = 5;
+    private const int MaxGamesPerSet = 7;
     private int currentSetCount = 0;
     private readonly List<(Entry, Entry)> setEntries = new();
 
@@ -54,6 +55,13 @@ public partial class TennisPage : ContentPage
             await DisplayAlertAsync("Erreur", "Veuillez remplir les noms des joueurs.", "OK");
             return;
         }
+
+        if (setEntries.Count is 1 or 4)
+        {
+            await DisplayAlertAsync("Erreur", "Un match de tennis ne peut pas avoir 1 ou 4 sets. Utilisez 2, 3 ou 5 sets.", "OK");
+            return;
+        }
+
         var sets = new List<string>();
         foreach (var (entry1, entry2) in setEntries)
         {
@@ -64,10 +72,24 @@ public partial class TennisPage : ContentPage
                 await DisplayAlertAsync("Erreur", "Veuillez remplir tous les scores de sets.", "OK");
                 return;
             }
-            sets.Add($"{s1}/{s2}");
+
+            if (!int.TryParse(s1, out var scoreJoueur1) || !int.TryParse(s2, out var scoreJoueur2))
+            {
+                await DisplayAlertAsync("Erreur", "Les scores des sets doivent etre des nombres entiers.", "OK");
+                return;
+            }
+
+            if (scoreJoueur1 < 0 || scoreJoueur1 > MaxGamesPerSet || scoreJoueur2 < 0 || scoreJoueur2 > MaxGamesPerSet)
+            {
+                await DisplayAlertAsync("Erreur", "Le score d'un set doit etre compris entre 0 et 7.", "OK");
+                return;
+            }
+
+            sets.Add($"{scoreJoueur1}/{scoreJoueur2}");
         }
+
         string scoreMatch = string.Join(" - ", sets);
-        await DisplayAlertAsync("Succès", $"Match enregistré : {joueur1} vs {joueur2} le {dateMatch:dd/MM/yyyy} - Score : {scoreMatch}", "OK");
+        await DisplayAlertAsync("Succes", $"Match enregistre : {joueur1} vs {joueur2} le {dateMatch:dd/MM/yyyy} - Score : {scoreMatch}", "OK");
         Player1Entry.Text = string.Empty;
         Player2Entry.Text = string.Empty;
         MatchDatePicker.Date = DateTime.Today;
