@@ -36,7 +36,7 @@
                                 <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                                       CommandParameter="{Binding Match}" />
                             </Frame.GestureRecognizers>
-                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                                 <Image Grid.Column="0"
                                        Source="{Binding ImageUrl}"
                                        WidthRequest="72"
@@ -54,6 +54,16 @@
                                         <Label Text="{Binding SetsFormatted[4]}" FontSize="15" TextColor="DarkGreen"/>
                                     </VerticalStackLayout>
                                 </VerticalStackLayout>
+                                <Button Grid.Column="2"
+                                        Text="↗"
+                                        FontSize="18"
+                                        WidthRequest="44"
+                                        HeightRequest="44"
+                                        Padding="0"
+                                        CornerRadius="22"
+                                        VerticalOptions="Center"
+                                        Command="{Binding BindingContext.ShareMatchCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding Match}" />
                             </Grid>
                         </Frame>
                     </DataTemplate>
@@ -71,7 +81,7 @@
                                 <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
                                                       CommandParameter="{Binding .}" />
                             </Frame.GestureRecognizers>
-                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
                                 <Image Grid.Column="0"
                                        Source="{Binding ImageUrl}"
                                        WidthRequest="72"
@@ -82,6 +92,16 @@
                                 <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
                                     <Label Text="{Binding NomMatch}" FontSize="20" FontAttributes="Bold" />
                                 </VerticalStackLayout>
+                                <Button Grid.Column="2"
+                                        Text="↗"
+                                        FontSize="18"
+                                        WidthRequest="44"
+                                        HeightRequest="44"
+                                        Padding="0"
+                                        CornerRadius="22"
+                                        VerticalOptions="Center"
+                                        Command="{Binding BindingContext.ShareMatchCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                        CommandParameter="{Binding .}" />
                             </Grid>
                         </Frame>
                     </DataTemplate>

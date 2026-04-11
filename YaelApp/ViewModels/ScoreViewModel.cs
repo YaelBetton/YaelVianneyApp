@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.ApplicationModel.DataTransfer;
 using YaelApp.Models;
 using YaelApp.Services;
 
@@ -107,6 +108,29 @@ namespace YaelApp.ViewModels
             {
                 IsBusy = false;
             }
+        }
+
+        [RelayCommand]
+        public async Task ShareMatchAsync(MatchModel match)
+        {
+            if (match is null) return;
+
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine(match.NomMatch);
+
+            if (!string.IsNullOrEmpty(match.EquipeDomicile) && !string.IsNullOrEmpty(match.EquipeExterieur))
+                sb.AppendLine($"{match.EquipeDomicile} {match.ScoreHome} - {match.ScoreAway} {match.EquipeExterieur}");
+            else
+                sb.AppendLine(match.ScoreDisplay);
+
+            foreach (var set in match.TennisSetsFormatted)
+                sb.AppendLine(set);
+
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = sb.ToString().Trim(),
+                Title = "Partager le résultat"
+            });
         }
 
         [RelayCommand]
