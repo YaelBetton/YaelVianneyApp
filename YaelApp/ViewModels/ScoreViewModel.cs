@@ -7,7 +7,6 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.ApplicationModel;
 using YaelApp.Models;
 using YaelApp.Services;
-using YaelApp.ViewModels;
 
 namespace YaelApp.ViewModels
 {
@@ -43,6 +42,9 @@ namespace YaelApp.ViewModels
                 foreach (var m in TennisMatches)
                     TennisMatchesVM.Add(new TennisMatchViewModel(m));
             };
+
+            // Les matchs locaux sont ajoutés dans LoadScoresAsync pour éviter
+            // qu'ils soient effacés par le Clear() à chaque rechargement.
         }
 
         [RelayCommand]
@@ -75,13 +77,17 @@ namespace YaelApp.ViewModels
 
                     if (tennisResult is not null)
                     {
-                        // On ajoute les nouveaux résultats API sans effacer les locaux
                         foreach (var match in tennisResult)
                         {
-                            // On évite les doublons (par exemple, même id)
                             if (!TennisMatches.Any(m => m.Id == match.Id))
                                 TennisMatches.Add(match);
                         }
+                    }
+
+                    // Matchs locaux en premier (joués via l'onglet Volley)
+                    foreach (var match in VolleyMatchService.Instance.LocalMatches)
+                    {
+                        VolleyMatches.Add(match);
                     }
 
                     if (volleyResult is not null)

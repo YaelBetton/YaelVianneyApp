@@ -26,8 +26,20 @@
                     </Grid>
                 </VerticalStackLayout>
             </Frame>
-            <Label Text="Détails supplémentaires" FontSize="18" FontAttributes="Bold" Margin="0,10,0,0"/>
-            <Label Text="{Binding Match.Id, StringFormat='Identifiant du match : {0}'}" FontSize="14" TextColor="Gray"/>
+            <Label Text="Score par set"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,10,0,0"/>
+            <VerticalStackLayout Spacing="6"
+                                 BindableLayout.ItemsSource="{Binding Match.TennisSetsFormatted}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Border Padding="12,8" StrokeShape="RoundRectangle 8" BackgroundColor="#F5F5F5" Stroke="Transparent">
+                            <Label Text="{Binding .}" FontSize="15" TextColor="DarkGreen" />
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

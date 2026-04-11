@@ -22,6 +22,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ScoreDetailViewModel>();
         builder.Services.AddTransient<ScoreDetailPage>();
         builder.Services.AddTransient<TennisPage>();
+        builder.Services.AddSingleton<VolleyScoreViewModel>();
         builder.Services.AddTransient<VolleyPage>();
 #if DEBUG
         builder.Logging.AddDebug();

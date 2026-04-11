@@ -86,9 +86,11 @@ namespace YaelApp.Models
                     return RawImageUrl;
                 }
 
-                return string.Equals(Sport, "Tennis", System.StringComparison.OrdinalIgnoreCase)
-                    ? "tennis_fallback.jpg"
-                    : "dotnet_bot.png";
+                if (string.Equals(Sport, "Tennis", System.StringComparison.OrdinalIgnoreCase))
+                    return "tennis_fallback.jpg";
+                if (string.Equals(Sport, "Volleyball", System.StringComparison.OrdinalIgnoreCase))
+                    return "volley_image.jpg";
+                return "dotnet_bot.png";
             }
         }
 

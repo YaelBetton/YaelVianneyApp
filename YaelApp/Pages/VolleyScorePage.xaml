@@ -2,30 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:YaelApp.ViewModels"
-             x:Class="YaelApp.Pages.VolleyPage"
+             xmlns:models="clr-namespace:YaelApp.Models"
+             x:Class="YaelApp.Pages.VolleyScorePage"
              x:DataType="vm:VolleyScoreViewModel"
-             Title="Volley">
+             Title="Score Live Volley">
     <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="20">
-
-            <!-- En-tête -->
-            <Image Source="volley_image.jpg"
-                   SemanticProperties.Description="Image de volley-ball"
-                   HeightRequest="160"
-                   Aspect="AspectFit"
-                   HorizontalOptions="Center" />
-            <Label Text="Volley"
-                   FontSize="32"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
-
-            <BoxView HeightRequest="1" Color="LightGray" Margin="0,4" />
 
             <!-- ======================================================= -->
             <!-- FONCTIONNALITÉ 1 : COMPTEUR DE SCORE EN DIRECT           -->
             <!-- ======================================================= -->
             <Label Text="Compteur de score en direct"
-                   FontSize="20"
+                   FontSize="22"
                    FontAttributes="Bold"
                    HorizontalOptions="Center" />
 
@@ -33,7 +21,7 @@
             <VerticalStackLayout Spacing="12"
                                  IsVisible="{Binding IsSetupVisible}">
                 <Label Text="Noms des équipes"
-                       FontSize="15"
+                       FontSize="16"
                        HorizontalOptions="Center"
                        TextColor="Gray" />
                 <Border Stroke="LightGray" StrokeShape="RoundRectangle 10" Padding="4">
@@ -197,7 +185,7 @@
                                 Padding="20,10"
                                 HorizontalOptions="Center"
                                 IsVisible="{Binding IsSaveButtonVisible}" />
-                        <Label Text="Match enregistré dans Score !"
+                        <Label Text="Match enregistré !"
                                FontSize="14"
                                TextColor="#4CAF50"
                                FontAttributes="Bold"
@@ -223,6 +211,48 @@
                         IsVisible="{Binding AreButtonsVisible}" />
             </VerticalStackLayout>
 
+            <!-- ======================================================= -->
+            <!-- FONCTIONNALITÉ 2 : HISTORIQUE DES MATCHS JOUÉS           -->
+            <!-- ======================================================= -->
+            <BoxView HeightRequest="1" Color="LightGray" Margin="0,8" />
+
+            <Label Text="Historique des matchs joués"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Aucun match enregistré pour l'instant."
+                   FontSize="14"
+                   TextColor="Gray"
+                   HorizontalOptions="Center"
+                   IsVisible="{Binding NoHistory}" />
+
+            <CollectionView ItemsSource="{Binding MatchHistory}"
+                            SelectionMode="None"
+                            IsVisible="{Binding HasHistory}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:MatchModel">
+                        <Frame Margin="0,6" Padding="14" CornerRadius="12" HasShadow="True">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding NomMatch}"
+                                       FontSize="16"
+                                       FontAttributes="Bold" />
+                                <Label FontSize="14" TextColor="DarkGreen">
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Sets : {0} — {1}">
+                                            <Binding Path="ScoreHome" />
+                                            <Binding Path="ScoreAway" />
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                                <Label Text="{Binding ResultatRaw, StringFormat='Détail : {0}'}"
+                                       FontSize="12"
+                                       TextColor="Gray" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>

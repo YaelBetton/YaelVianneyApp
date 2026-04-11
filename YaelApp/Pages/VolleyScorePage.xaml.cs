@@ -2,9 +2,9 @@ using YaelApp.ViewModels;
 
 namespace YaelApp.Pages;
 
-public partial class VolleyPage : ContentPage
+public partial class VolleyScorePage : ContentPage
 {
-    public VolleyPage(VolleyScoreViewModel viewModel)
+    public VolleyScorePage(VolleyScoreViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
