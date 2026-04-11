@@ -4,226 +4,274 @@
              xmlns:vm="clr-namespace:YaelApp.ViewModels"
              x:Class="YaelApp.Pages.VolleyPage"
              x:DataType="vm:VolleyScoreViewModel"
-             Title="Volley">
+             Title="Volley"
+             Shell.NavBarIsVisible="False">
     <ScrollView>
-        <VerticalStackLayout Spacing="16" Padding="20">
+        <VerticalStackLayout Spacing="0">
 
-            <!-- En-tête -->
-            <Image Source="volley_image.jpg"
-                   SemanticProperties.Description="Image de volley-ball"
-                   HeightRequest="160"
-                   Aspect="AspectFit"
-                   HorizontalOptions="Center" />
-            <Label Text="Volley"
-                   FontSize="32"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
-
-            <BoxView HeightRequest="1" Color="LightGray" Margin="0,4" />
-
-            <!-- ======================================================= -->
-            <!-- FONCTIONNALITÉ 1 : COMPTEUR DE SCORE EN DIRECT           -->
-            <!-- ======================================================= -->
-            <Label Text="Compteur de score en direct"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
-
-            <!-- Avant le match : saisie des noms d'équipes -->
-            <VerticalStackLayout Spacing="12"
-                                 IsVisible="{Binding IsSetupVisible}">
-                <Label Text="Noms des équipes"
-                       FontSize="15"
-                       HorizontalOptions="Center"
-                       TextColor="Gray" />
-                <Border Stroke="LightGray" StrokeShape="RoundRectangle 10" Padding="4">
-                    <Entry Placeholder="Équipe A"
-                           Text="{Binding TeamAName}"
-                           FontSize="16"
-                           HorizontalOptions="FillAndExpand" />
-                </Border>
-                <Border Stroke="LightGray" StrokeShape="RoundRectangle 10" Padding="4">
-                    <Entry Placeholder="Équipe B"
-                           Text="{Binding TeamBName}"
-                           FontSize="16"
-                           HorizontalOptions="FillAndExpand" />
-                </Border>
-                <Button Text="Démarrer le match"
-                        Command="{Binding StartMatchCommand}"
-                        HorizontalOptions="Center"
-                        Padding="24,12" />
-            </VerticalStackLayout>
-
-            <!-- Pendant / après le match -->
-            <VerticalStackLayout Spacing="16"
-                                 IsVisible="{Binding IsLiveVisible}">
-
-                <!-- Set en cours -->
-                <Label Text="{Binding CurrentSet, StringFormat='Set {0} / 5'}"
-                       FontSize="18"
-                       HorizontalOptions="Center"
-                       TextColor="Gray" />
-
-                <!-- Score du set en cours -->
-                <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
-
-                    <!-- Équipe A -->
-                    <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="8">
-                        <Label Text="{Binding TeamAName}"
-                               FontSize="16"
+            <!-- Bannière sport -->
+            <Border BackgroundColor="{StaticResource VolleyBlue}"
+                    StrokeShape="RoundRectangle 0,0,24,24"
+                    Stroke="Transparent"
+                    Padding="20,36,20,24">
+                <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+                    <Image Source="volley_image.jpg"
+                           HeightRequest="72"
+                           WidthRequest="72"
+                           Aspect="AspectFit" />
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Text="Volley"
+                               FontSize="32"
                                FontAttributes="Bold"
-                               HorizontalOptions="Center" />
-                        <Label Text="{Binding ScoreA}"
-                               FontSize="56"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               TextColor="#1565C0" />
-                        <HorizontalStackLayout Spacing="8"
-                                               HorizontalOptions="Center"
-                                               IsVisible="{Binding AreButtonsVisible}">
-                            <Button Text="-"
-                                    Command="{Binding RemovePointACommand}"
-                                    WidthRequest="50"
-                                    HeightRequest="50"
-                                    BackgroundColor="#EF9A9A"
-                                    TextColor="Black"
-                                    CornerRadius="25"
-                                    Padding="0" />
-                            <Button Text="+"
-                                    Command="{Binding AddPointACommand}"
-                                    WidthRequest="50"
-                                    HeightRequest="50"
-                                    BackgroundColor="#A5D6A7"
-                                    TextColor="Black"
-                                    CornerRadius="25"
-                                    Padding="0" />
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-
-                    <!-- Séparateur -->
-                    <Label Grid.Column="1"
-                           Text="—"
-                           FontSize="40"
-                           VerticalOptions="Start"
-                           Margin="0,28,0,0" />
-
-                    <!-- Équipe B -->
-                    <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="8">
-                        <Label Text="{Binding TeamBName}"
-                               FontSize="16"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center" />
-                        <Label Text="{Binding ScoreB}"
-                               FontSize="56"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               TextColor="#B71C1C" />
-                        <HorizontalStackLayout Spacing="8"
-                                               HorizontalOptions="Center"
-                                               IsVisible="{Binding AreButtonsVisible}">
-                            <Button Text="-"
-                                    Command="{Binding RemovePointBCommand}"
-                                    WidthRequest="50"
-                                    HeightRequest="50"
-                                    BackgroundColor="#EF9A9A"
-                                    TextColor="Black"
-                                    CornerRadius="25"
-                                    Padding="0" />
-                            <Button Text="+"
-                                    Command="{Binding AddPointBCommand}"
-                                    WidthRequest="50"
-                                    HeightRequest="50"
-                                    BackgroundColor="#A5D6A7"
-                                    TextColor="Black"
-                                    CornerRadius="25"
-                                    Padding="0" />
-                        </HorizontalStackLayout>
-                    </VerticalStackLayout>
-                </Grid>
-
-                <!-- Score des sets -->
-                <Frame CornerRadius="12" Padding="16" BackgroundColor="#F5F5F5" HasShadow="False">
-                    <VerticalStackLayout Spacing="4">
-                        <Label Text="Sets remportés"
-                               FontSize="13"
-                               TextColor="Gray"
-                               HorizontalOptions="Center" />
-                        <Label FontSize="28"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center">
-                            <Label.Text>
-                                <MultiBinding StringFormat="{}{0}  —  {1}">
-                                    <Binding Path="SetsA" />
-                                    <Binding Path="SetsB" />
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
-                        <Label Text="{Binding SetHistory}"
-                               FontSize="12"
-                               TextColor="Gray"
-                               HorizontalOptions="Center"
-                               HorizontalTextAlignment="Center" />
-                    </VerticalStackLayout>
-                </Frame>
-
-                <!-- Message de fin de match -->
-                <Frame CornerRadius="12"
-                       Padding="16"
-                       BackgroundColor="#E8F5E9"
-                       HasShadow="True"
-                       IsVisible="{Binding IsFinishedVisible}">
-                    <VerticalStackLayout Spacing="12">
-                        <Label Text="Match terminé !"
-                               FontSize="20"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               TextColor="#2E7D32" />
-                        <Label FontSize="16"
-                               HorizontalOptions="Center"
-                               TextColor="#2E7D32">
-                            <Label.Text>
-                                <MultiBinding StringFormat="Vainqueur : {0}  ({1} - {2})">
-                                    <Binding Path="Winner" />
-                                    <Binding Path="SetsA" />
-                                    <Binding Path="SetsB" />
-                                </MultiBinding>
-                            </Label.Text>
-                        </Label>
-                        <Button Text="Enregistrer dans Score"
-                                Command="{Binding SaveMatchCommand}"
-                                BackgroundColor="#4CAF50"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Padding="20,10"
-                                HorizontalOptions="Center"
-                                IsVisible="{Binding IsSaveButtonVisible}" />
-                        <Label Text="Match enregistré dans Score !"
+                               TextColor="White" />
+                        <Label Text="Score en direct"
                                FontSize="14"
-                               TextColor="#4CAF50"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               IsVisible="{Binding IsSavedLabelVisible}" />
-                        <Button Text="Nouveau match"
-                                Command="{Binding ResetMatchCommand}"
-                                BackgroundColor="#2196F3"
-                                TextColor="White"
-                                CornerRadius="10"
-                                Padding="20,10"
-                                HorizontalOptions="Center" />
+                               TextColor="#BBDEFB" />
                     </VerticalStackLayout>
-                </Frame>
+                </HorizontalStackLayout>
+            </Border>
 
-                <!-- Bouton annuler (pendant le match uniquement) -->
-                <Button Text="Annuler le match"
-                        Command="{Binding ResetMatchCommand}"
-                        BackgroundColor="#FFCDD2"
-                        TextColor="#B71C1C"
-                        CornerRadius="10"
-                        HorizontalOptions="Center"
-                        IsVisible="{Binding AreButtonsVisible}" />
+            <VerticalStackLayout Spacing="16" Padding="20,24">
+
+                <!-- ================================================ -->
+                <!-- SETUP : saisie des équipes                        -->
+                <!-- ================================================ -->
+                <Border StrokeShape="RoundRectangle 16"
+                        Stroke="{StaticResource Gray100}"
+                        BackgroundColor="White"
+                        Padding="16"
+                        IsVisible="{Binding IsSetupVisible}">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.07" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Équipes" FontSize="16" FontAttributes="Bold" />
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Équipe A" FontSize="12" TextColor="{StaticResource Gray500}" />
+                            <Border Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 10" Padding="8,4">
+                                <Entry Placeholder="Nom de l'équipe A"
+                                       Text="{Binding TeamAName}"
+                                       FontSize="15" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Équipe B" FontSize="12" TextColor="{StaticResource Gray500}" />
+                            <Border Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 10" Padding="8,4">
+                                <Entry Placeholder="Nom de l'équipe B"
+                                       Text="{Binding TeamBName}"
+                                       FontSize="15" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <Button Text="Démarrer le match"
+                                Command="{Binding StartMatchCommand}"
+                                BackgroundColor="{StaticResource VolleyBlue}"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="12"
+                                HeightRequest="48"
+                                Margin="0,4,0,0" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- ================================================ -->
+                <!-- SCORE EN DIRECT (tableau de score)                -->
+                <!-- ================================================ -->
+                <VerticalStackLayout Spacing="12" IsVisible="{Binding IsLiveVisible}">
+
+                    <!-- Indicateur de set -->
+                    <Label Text="{Binding CurrentSet, StringFormat='SET {0} / 5'}"
+                           FontSize="13"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="{StaticResource VolleyBlue}"
+                           CharacterSpacing="2" />
+
+                    <!-- Tableau de score sombre -->
+                    <Border BackgroundColor="{StaticResource ScoreboardDark}"
+                            StrokeShape="RoundRectangle 20"
+                            Stroke="Transparent"
+                            Padding="20,24">
+                        <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="8">
+
+                            <!-- Équipe A -->
+                            <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="10">
+                                <Label Text="{Binding TeamAName}"
+                                       FontSize="13"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       TextColor="#90CAF9"
+                                       CharacterSpacing="1" />
+                                <Label Text="{Binding ScoreA}"
+                                       FontSize="80"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       TextColor="White" />
+                                <HorizontalStackLayout Spacing="10"
+                                                       HorizontalOptions="Center"
+                                                       IsVisible="{Binding AreButtonsVisible}">
+                                    <Button Text="−"
+                                            Command="{Binding RemovePointACommand}"
+                                            WidthRequest="44"
+                                            HeightRequest="44"
+                                            FontSize="22"
+                                            BackgroundColor="#37474F"
+                                            TextColor="White"
+                                            CornerRadius="22"
+                                            Padding="0" />
+                                    <Button Text="+"
+                                            Command="{Binding AddPointACommand}"
+                                            WidthRequest="44"
+                                            HeightRequest="44"
+                                            FontSize="22"
+                                            BackgroundColor="#1565C0"
+                                            TextColor="White"
+                                            CornerRadius="22"
+                                            Padding="0" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <!-- Séparateur -->
+                            <Label Grid.Column="1"
+                                   Text=":"
+                                   FontSize="52"
+                                   FontAttributes="Bold"
+                                   TextColor="#37474F"
+                                   VerticalOptions="Start"
+                                   Margin="0,30,0,0" />
+
+                            <!-- Équipe B -->
+                            <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="10">
+                                <Label Text="{Binding TeamBName}"
+                                       FontSize="13"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       TextColor="#EF9A9A"
+                                       CharacterSpacing="1" />
+                                <Label Text="{Binding ScoreB}"
+                                       FontSize="80"
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="Center"
+                                       TextColor="White" />
+                                <HorizontalStackLayout Spacing="10"
+                                                       HorizontalOptions="Center"
+                                                       IsVisible="{Binding AreButtonsVisible}">
+                                    <Button Text="−"
+                                            Command="{Binding RemovePointBCommand}"
+                                            WidthRequest="44"
+                                            HeightRequest="44"
+                                            FontSize="22"
+                                            BackgroundColor="#37474F"
+                                            TextColor="White"
+                                            CornerRadius="22"
+                                            Padding="0" />
+                                    <Button Text="+"
+                                            Command="{Binding AddPointBCommand}"
+                                            WidthRequest="44"
+                                            HeightRequest="44"
+                                            FontSize="22"
+                                            BackgroundColor="#B71C1C"
+                                            TextColor="White"
+                                            CornerRadius="22"
+                                            Padding="0" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
+
+                    <!-- Sets remportés -->
+                    <Border StrokeShape="RoundRectangle 14"
+                            Stroke="{StaticResource Gray100}"
+                            BackgroundColor="White"
+                            Padding="16,12">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="SETS REMPORTÉS"
+                                   FontSize="11"
+                                   TextColor="{StaticResource Gray400}"
+                                   HorizontalOptions="Center"
+                                   CharacterSpacing="1.5" />
+                            <Label FontSize="32"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}  —  {1}">
+                                        <Binding Path="SetsA" />
+                                        <Binding Path="SetsB" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label Text="{Binding SetHistory}"
+                                   FontSize="12"
+                                   TextColor="{StaticResource Gray400}"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Fin de match -->
+                    <Border StrokeShape="RoundRectangle 16"
+                            Stroke="Transparent"
+                            BackgroundColor="#E8F5E9"
+                            Padding="20"
+                            IsVisible="{Binding IsFinishedVisible}">
+                        <VerticalStackLayout Spacing="12">
+                            <Label Text="MATCH TERMINÉ"
+                                   FontSize="13"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource TennisGreen}"
+                                   CharacterSpacing="1.5" />
+                            <Label FontSize="18"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   TextColor="{StaticResource TennisGreen}">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="🏆  {0}  ({1} - {2})">
+                                        <Binding Path="Winner" />
+                                        <Binding Path="SetsA" />
+                                        <Binding Path="SetsB" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Button Text="Enregistrer dans Score"
+                                    Command="{Binding SaveMatchCommand}"
+                                    BackgroundColor="{StaticResource TennisGreen}"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="48"
+                                    IsVisible="{Binding IsSaveButtonVisible}" />
+                            <Label Text="✓  Match enregistré dans Score !"
+                                   FontSize="14"
+                                   TextColor="{StaticResource TennisGreen}"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"
+                                   IsVisible="{Binding IsSavedLabelVisible}" />
+                            <Button Text="Nouveau match"
+                                    Command="{Binding ResetMatchCommand}"
+                                    BackgroundColor="{StaticResource VolleyBlue}"
+                                    TextColor="White"
+                                    FontAttributes="Bold"
+                                    CornerRadius="12"
+                                    HeightRequest="48" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Annuler -->
+                    <Button Text="Annuler le match"
+                            Command="{Binding ResetMatchCommand}"
+                            BackgroundColor="{StaticResource CardBackground}"
+                            TextColor="#B71C1C"
+                            FontAttributes="Bold"
+                            CornerRadius="12"
+                            HeightRequest="44"
+                            IsVisible="{Binding AreButtonsVisible}" />
+
+                </VerticalStackLayout>
+
             </VerticalStackLayout>
-
-
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

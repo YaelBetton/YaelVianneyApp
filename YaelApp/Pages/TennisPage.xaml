@@ -2,33 +2,109 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="YaelApp.Pages.TennisPage"
-             Title="Tennis">
+             Title="Tennis"
+             Shell.NavBarIsVisible="False">
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,20"
-            VerticalOptions="Center">
-            <Image
-                Source="tennis_image.jpg"
-                SemanticProperties.Description="Image de tennis"
-                HeightRequest="200"
-                WidthRequest="200"
-                Aspect="AspectFit"
-                HorizontalOptions="Center" />
-            <Label
-                Text="Tennis"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+        <VerticalStackLayout Spacing="0">
 
-            <Entry x:Name="Player1Entry" Placeholder="Nom du Joueur 1" />
-            <Entry x:Name="Player2Entry" Placeholder="Nom du Joueur 2" />
-            <DatePicker x:Name="MatchDatePicker" Format="dd/MM/yyyy" />
-            <Label Text="Sets" FontAttributes="Bold" FontSize="18" HorizontalOptions="Center" />
-            <StackLayout x:Name="SetsStack" Spacing="10" />
-            <Button x:Name="AddSetButton" Text="Ajouter un set" Clicked="OnAddSetClicked" />
-            <Button Text="Enregistrer le match" Clicked="OnSaveMatchClicked" />
+            <!-- Bannière sport -->
+            <Border BackgroundColor="{StaticResource TennisGreen}"
+                    StrokeShape="RoundRectangle 0,0,24,24"
+                    Stroke="Transparent"
+                    Padding="20,36,20,24">
+                <HorizontalStackLayout Spacing="16" HorizontalOptions="Center">
+                    <Image Source="tennis_image.jpg"
+                           HeightRequest="72"
+                           WidthRequest="72"
+                           Aspect="AspectFit" />
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Text="Tennis"
+                               FontSize="32"
+                               FontAttributes="Bold"
+                               TextColor="White" />
+                        <Label Text="Enregistrer un match"
+                               FontSize="14"
+                               TextColor="#C8E6C9" />
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </Border>
 
+            <VerticalStackLayout Spacing="16" Padding="20,24">
+
+                <!-- Formulaire joueurs -->
+                <Border StrokeShape="RoundRectangle 16"
+                        Stroke="{StaticResource Gray100}"
+                        BackgroundColor="White"
+                        Padding="16">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.07" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Joueurs" FontSize="16" FontAttributes="Bold" />
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Joueur 1" FontSize="12" TextColor="{StaticResource Gray500}" />
+                            <Border Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 10" Padding="8,4">
+                                <Entry x:Name="Player1Entry"
+                                       Placeholder="Nom du joueur 1"
+                                       FontSize="15" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Joueur 2" FontSize="12" TextColor="{StaticResource Gray500}" />
+                            <Border Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 10" Padding="8,4">
+                                <Entry x:Name="Player2Entry"
+                                       Placeholder="Nom du joueur 2"
+                                       FontSize="15" />
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Date du match" FontSize="12" TextColor="{StaticResource Gray500}" />
+                            <Border Stroke="{StaticResource Gray200}" StrokeShape="RoundRectangle 10" Padding="8,4">
+                                <DatePicker x:Name="MatchDatePicker"
+                                            Format="dd/MM/yyyy"
+                                            FontSize="15" />
+                            </Border>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Section sets -->
+                <Border StrokeShape="RoundRectangle 16"
+                        Stroke="{StaticResource Gray100}"
+                        BackgroundColor="White"
+                        Padding="16">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.07" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="Sets" FontSize="16" FontAttributes="Bold" />
+                        <StackLayout x:Name="SetsStack" Spacing="10" />
+                        <Button x:Name="AddSetButton"
+                                Text="+ Ajouter un set"
+                                Clicked="OnAddSetClicked"
+                                BackgroundColor="{StaticResource CardBackground}"
+                                TextColor="{StaticResource TennisGreen}"
+                                FontAttributes="Bold"
+                                CornerRadius="10"
+                                HorizontalOptions="Start" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Bouton enregistrer -->
+                <Button Text="Enregistrer le match"
+                        Clicked="OnSaveMatchClicked"
+                        BackgroundColor="{StaticResource TennisGreen}"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        CornerRadius="14"
+                        HeightRequest="52"
+                        Margin="0,4,0,0" />
+
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

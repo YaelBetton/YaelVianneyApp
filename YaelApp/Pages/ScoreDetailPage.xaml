@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:YaelApp.ViewModels"
@@ -6,39 +6,86 @@
              x:DataType="viewmodels:ScoreDetailViewModel"
              Title="Détail du Match">
     <ScrollView>
-        <VerticalStackLayout Spacing="20" Padding="20">
-            <Image Source="{Binding Match.ImageUrl}" 
-                   HeightRequest="250" 
-                   Aspect="AspectFit" 
-                   HorizontalOptions="Center" />
-            <Label Text="{Binding Match.NomMatch}" 
-                   FontSize="24" 
-                   FontAttributes="Bold" 
-                   HorizontalOptions="Center" 
-                   HorizontalTextAlignment="Center"/>
-            <Frame BackgroundColor="#F0F0F0" Padding="15" CornerRadius="10" HasShadow="False">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="Score final :" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
-                    <Grid ColumnDefinitions="*, Auto, *" ColumnSpacing="15">
-                        <Label Grid.Column="0" Text="{Binding Match.EquipeDomicile}" FontSize="16" HorizontalOptions="End" />
-                        <Label Grid.Column="1" Text="{Binding Match.ScoreDisplay}" FontSize="20" FontAttributes="Bold" />
-                        <Label Grid.Column="2" Text="{Binding Match.EquipeExterieur}" FontSize="16" HorizontalOptions="Start" />
-                    </Grid>
+        <VerticalStackLayout Spacing="0">
+
+            <!-- Image en bannière -->
+            <Image Source="{Binding Match.ImageUrl}"
+                   Aspect="AspectFill"
+                   HeightRequest="220" />
+
+            <VerticalStackLayout Spacing="16" Padding="20,20">
+
+                <!-- Nom du match -->
+                <Label Text="{Binding Match.NomMatch}"
+                       FontSize="24"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center" />
+
+                <!-- Score final -->
+                <Border StrokeShape="RoundRectangle 16"
+                        Stroke="{StaticResource Gray100}"
+                        BackgroundColor="White"
+                        Padding="20">
+                    <Border.Shadow>
+                        <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.07" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Spacing="12">
+                        <Label Text="SCORE FINAL"
+                               FontSize="11"
+                               TextColor="{StaticResource Gray400}"
+                               HorizontalOptions="Center"
+                               CharacterSpacing="1.5" />
+                        <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="12">
+                            <Label Grid.Column="0"
+                                   Text="{Binding Match.EquipeDomicile}"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="End"
+                                   HorizontalTextAlignment="End"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Match.ScoreDisplay}"
+                                   FontSize="28"
+                                   FontAttributes="Bold"
+                                   TextColor="{StaticResource Primary}"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="2"
+                                   Text="{Binding Match.EquipeExterieur}"
+                                   FontSize="15"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Start"
+                                   VerticalOptions="Center" />
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- Score par set -->
+                <Label Text="SCORE PAR SET"
+                       FontSize="11"
+                       TextColor="{StaticResource Gray400}"
+                       CharacterSpacing="1.5"
+                       Margin="0,4,0,0" />
+
+                <VerticalStackLayout Spacing="8"
+                                     BindableLayout.ItemsSource="{Binding Match.TennisSetsFormatted}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="x:String">
+                            <Border StrokeShape="RoundRectangle 12"
+                                    Stroke="{StaticResource Gray100}"
+                                    BackgroundColor="White"
+                                    Padding="16,12">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="0,1" Radius="4" Opacity="0.05" />
+                                </Border.Shadow>
+                                <Label Text="{Binding .}"
+                                       FontSize="15"
+                                       TextColor="{StaticResource Primary}" />
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
                 </VerticalStackLayout>
-            </Frame>
-            <Label Text="Score par set"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   Margin="0,10,0,0"/>
-            <VerticalStackLayout Spacing="6"
-                                 BindableLayout.ItemsSource="{Binding Match.TennisSetsFormatted}">
-                <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="x:String">
-                        <Border Padding="12,8" StrokeShape="RoundRectangle 8" BackgroundColor="#F5F5F5" Stroke="Transparent">
-                            <Label Text="{Binding .}" FontSize="15" TextColor="DarkGreen" />
-                        </Border>
-                    </DataTemplate>
-                </BindableLayout.ItemTemplate>
+
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

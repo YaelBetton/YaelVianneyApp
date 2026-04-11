@@ -5,108 +5,156 @@
              xmlns:models="clr-namespace:YaelApp.Models"
              x:Class="YaelApp.Pages.ScorePage"
              x:DataType="viewmodels:ScoreViewModel"
-             Title="Score">
+             Title="Score"
+             Shell.NavBarIsVisible="False">
     <ScrollView>
-        <VerticalStackLayout Spacing="24" Padding="16">
-            <!-- Bandeau descriptif -->
-            <VerticalStackLayout Spacing="15" HorizontalOptions="Center" WidthRequest="300">
+        <VerticalStackLayout Spacing="0">
+
+            <!-- En-tête -->
+            <VerticalStackLayout Spacing="6" Padding="24,40,24,16" HorizontalOptions="Center">
                 <Image Source="scores_image.jpg"
-                       SemanticProperties.Description="Image de scores sportifs"
-                       HeightRequest="200"
-                       WidthRequest="200"
+                       HeightRequest="64"
+                       WidthRequest="64"
                        Aspect="AspectFit"
                        HorizontalOptions="Center" />
-                <Label Text="Score"
-                       SemanticProperties.HeadingLevel="Level1"
-                       FontSize="32"
+                <Label Text="Scores"
+                       FontSize="36"
+                       FontAttributes="Bold"
                        HorizontalOptions="Center" />
-                <Label Text="Retrouve ici les scores et résultats des matchs."
-                       FontSize="18"
-                       HorizontalOptions="Center"
-                       HorizontalTextAlignment="Center" />
+                <Label Text="Résultats des derniers matchs"
+                       FontSize="14"
+                       TextColor="{StaticResource Gray500}"
+                       HorizontalOptions="Center" />
+                <BoxView HeightRequest="3"
+                         WidthRequest="48"
+                         CornerRadius="2"
+                         Color="{StaticResource Primary}"
+                         HorizontalOptions="Center"
+                         Margin="0,6,0,0" />
             </VerticalStackLayout>
 
-            <Label Text="Résultats Tennis" FontSize="24" FontAttributes="Bold" />
-            <CollectionView ItemsSource="{Binding TennisMatchesVM}"
-                            SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="viewmodels:TennisMatchViewModel">
-                        <Frame Margin="0,6" Padding="12" CornerRadius="12" HasShadow="True">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                                      CommandParameter="{Binding Match}" />
-                            </Frame.GestureRecognizers>
-                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                                <Image Grid.Column="0"
-                                       Source="{Binding ImageUrl}"
-                                       WidthRequest="72"
-                                       HeightRequest="72"
-                                       Aspect="AspectFill"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Start" />
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
-                                    <Label Text="{Binding NomMatch}" FontSize="20" FontAttributes="Bold" />
-                                    <VerticalStackLayout Spacing="0">
-                                        <Label Text="{Binding SetsFormatted[0]}" FontSize="15" TextColor="DarkGreen"/>
-                                        <Label Text="{Binding SetsFormatted[1]}" FontSize="15" TextColor="DarkGreen"/>
-                                        <Label Text="{Binding SetsFormatted[2]}" FontSize="15" TextColor="DarkGreen"/>
-                                        <Label Text="{Binding SetsFormatted[3]}" FontSize="15" TextColor="DarkGreen"/>
-                                        <Label Text="{Binding SetsFormatted[4]}" FontSize="15" TextColor="DarkGreen"/>
-                                    </VerticalStackLayout>
-                                </VerticalStackLayout>
-                                <Button Grid.Column="2"
-                                        Text="↗"
-                                        FontSize="18"
-                                        WidthRequest="44"
-                                        HeightRequest="44"
-                                        Padding="0"
-                                        CornerRadius="22"
-                                        VerticalOptions="Center"
-                                        Command="{Binding BindingContext.ShareMatchCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding Match}" />
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <VerticalStackLayout Spacing="20" Padding="16,8">
 
-            <!-- Section volley -->
-            <Label Text="Résultats Volley" FontSize="24" FontAttributes="Bold" />
-            <CollectionView ItemsSource="{Binding VolleyMatches}"
-                            SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:MatchModel">
-                        <Frame Margin="0,6" Padding="12" CornerRadius="12" HasShadow="True">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                                      CommandParameter="{Binding .}" />
-                            </Frame.GestureRecognizers>
-                            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
-                                <Image Grid.Column="0"
-                                       Source="{Binding ImageUrl}"
-                                       WidthRequest="72"
-                                       HeightRequest="72"
-                                       Aspect="AspectFill"
-                                       VerticalOptions="Center"
-                                       HorizontalOptions="Start" />
-                                <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
-                                    <Label Text="{Binding NomMatch}" FontSize="20" FontAttributes="Bold" />
-                                </VerticalStackLayout>
-                                <Button Grid.Column="2"
-                                        Text="↗"
-                                        FontSize="18"
-                                        WidthRequest="44"
-                                        HeightRequest="44"
-                                        Padding="0"
-                                        CornerRadius="22"
-                                        VerticalOptions="Center"
-                                        Command="{Binding BindingContext.ShareMatchCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
-                                        CommandParameter="{Binding .}" />
-                            </Grid>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                <!-- Section Tennis -->
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <BoxView WidthRequest="4" HeightRequest="24" CornerRadius="2" Color="{StaticResource TennisGreen}" VerticalOptions="Center" />
+                    <Label Text="🎾  Tennis" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding TennisMatchesVM}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="viewmodels:TennisMatchViewModel">
+                            <Border Margin="0,5"
+                                    StrokeShape="RoundRectangle 14"
+                                    Stroke="{StaticResource Gray100}"
+                                    BackgroundColor="White"
+                                    Padding="12">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.07" />
+                                </Border.Shadow>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                          CommandParameter="{Binding Match}" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                    <Border Grid.Column="0"
+                                            StrokeShape="RoundRectangle 10"
+                                            Stroke="Transparent"
+                                            WidthRequest="64"
+                                            HeightRequest="64"
+                                            VerticalOptions="Center">
+                                        <Image Source="{Binding ImageUrl}"
+                                               Aspect="AspectFill" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                        <Label Text="{Binding NomMatch}" FontSize="16" FontAttributes="Bold" />
+                                        <VerticalStackLayout Spacing="1">
+                                            <Label Text="{Binding SetsFormatted[0]}" FontSize="13" TextColor="{StaticResource TennisGreen}" />
+                                            <Label Text="{Binding SetsFormatted[1]}" FontSize="13" TextColor="{StaticResource TennisGreen}" />
+                                            <Label Text="{Binding SetsFormatted[2]}" FontSize="13" TextColor="{StaticResource TennisGreen}" />
+                                            <Label Text="{Binding SetsFormatted[3]}" FontSize="13" TextColor="{StaticResource TennisGreen}" />
+                                            <Label Text="{Binding SetsFormatted[4]}" FontSize="13" TextColor="{StaticResource TennisGreen}" />
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="2"
+                                            Text="↗"
+                                            FontSize="16"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            Padding="0"
+                                            CornerRadius="20"
+                                            BackgroundColor="{StaticResource CardBackground}"
+                                            TextColor="{StaticResource Gray500}"
+                                            VerticalOptions="Center"
+                                            Command="{Binding BindingContext.ShareMatchCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding Match}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Section Volley -->
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <BoxView WidthRequest="4" HeightRequest="24" CornerRadius="2" Color="{StaticResource VolleyBlue}" VerticalOptions="Center" />
+                    <Label Text="🏐  Volley" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <CollectionView ItemsSource="{Binding VolleyMatches}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:MatchModel">
+                            <Border Margin="0,5"
+                                    StrokeShape="RoundRectangle 14"
+                                    Stroke="{StaticResource Gray100}"
+                                    BackgroundColor="White"
+                                    Padding="12">
+                                <Border.Shadow>
+                                    <Shadow Brush="Black" Offset="0,2" Radius="8" Opacity="0.07" />
+                                </Border.Shadow>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.GoToDetailCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                                          CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+                                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="12">
+                                    <Border Grid.Column="0"
+                                            StrokeShape="RoundRectangle 10"
+                                            Stroke="Transparent"
+                                            WidthRequest="64"
+                                            HeightRequest="64"
+                                            VerticalOptions="Center">
+                                        <Image Source="{Binding ImageUrl}"
+                                               Aspect="AspectFill" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4">
+                                        <Label Text="{Binding NomMatch}" FontSize="16" FontAttributes="Bold" />
+                                        <Label FontSize="13" TextColor="{StaticResource VolleyBlue}">
+                                            <Label.Text>
+                                                <MultiBinding StringFormat="{}{0} — {1}">
+                                                    <Binding Path="ScoreHome" />
+                                                    <Binding Path="ScoreAway" />
+                                                </MultiBinding>
+                                            </Label.Text>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                    <Button Grid.Column="2"
+                                            Text="↗"
+                                            FontSize="16"
+                                            WidthRequest="40"
+                                            HeightRequest="40"
+                                            Padding="0"
+                                            CornerRadius="20"
+                                            BackgroundColor="{StaticResource CardBackground}"
+                                            TextColor="{StaticResource Gray500}"
+                                            VerticalOptions="Center"
+                                            Command="{Binding BindingContext.ShareMatchCommand, Source={RelativeSource AncestorType={x:Type ContentPage}}}"
+                                            CommandParameter="{Binding .}" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
